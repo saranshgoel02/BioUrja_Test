@@ -23,17 +23,11 @@ zone_sums = individual_forecasts.groupby('Zone')['Forecast'].sum().reset_index()
 print(zone_sums)
 df['Ratio_to_Zone_Sum'] = df.apply(lambda row: row['NewValue'] / zone_sums.loc[zone_sums['Zone'] == row['Zone'], 'Forecast'].values[0], axis=1)
 ratio_list = df['Ratio_to_Zone_Sum'].tolist()
-
-
 # Display the list of ratios
 print(ratio_list)
-
-
 # Display the list of zone-wise ratios
 print(zone_ratio_mapping)
 individual_forecasts['Forecast_Capacity_Ratio'] = individual_forecasts['Forecast'] / individual_forecasts['Capacity']
-
-
 # Display the updated DataFrame with the new column
 print(individual_forecasts)
 zone_ratio_mapping = {'East': ratio_list[0],
